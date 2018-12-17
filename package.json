@@ -1,0 +1,31 @@
+{
+  "name": "hello-stage",
+  "version": "1.0.0",
+  "description": "Says hello",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test/unit/**/*.js",
+    "start": "node src/server.js",
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "dummy": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dshaneg/hello-stage.git"
+  },
+  "author": "Shane Gibbons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dshaneg/hello-stage/issues"
+  },
+  "homepage": "https://github.com/dshaneg/hello-stage#readme",
+  "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12"
+  }
+}
