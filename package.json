@@ -4,7 +4,7 @@
   "description": "Says hello",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test/unit/**/*.js",
+    "test": "nyc --reporter=html --reporter text mocha test/unit/**/*.js",
     "start": "node src/server.js",
     "lint": "eslint src/**/*.js test/**/*.js",
     "dummy": ""
@@ -23,7 +23,8 @@
     "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   },
   "dependencies": {
     "bunyan": "^1.8.12"

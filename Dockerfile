@@ -18,14 +18,21 @@ RUN npm install
 # ---- Build ----
 # ---------------
 FROM dependencies AS build
+COPY auto auto/
 COPY src src/
 COPY test test/
 
 COPY .eslintrc.yaml ./
-RUN npm run --silent lint
 
-RUN npm run --silent test
+ENTRYPOINT ["./auto/build.sh"]
 
+# ----------------
+# -- Prerelease --
+# ----------------
+FROM build as prerelease
+
+# don't want to prune the build image, because I need to run tests in it.
+# don't want to prune the release image, since alpine is missing some tools to do it with (namely python)
 RUN npm prune --production
 
 # ----------------
@@ -37,10 +44,9 @@ FROM node:10.14.2-alpine AS release
 WORKDIR /app
 
 # production dependencies
-COPY --from=build /app/node_modules ./node_modules/
+COPY --from=prerelease /app/node_modules ./node_modules/
 
-# source code
-COPY --from=build /app/package.json ./
+COPY --from=dependencies /app/package*.json ./
 COPY --from=build /app/src ./src/
 
 ENTRYPOINT ["node", "src/server.js"]
